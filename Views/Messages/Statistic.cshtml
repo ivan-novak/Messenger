@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Messager.Models.Message>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Статистика</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sender)
+            </th>   
+            <th>
+                Count of messages
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{
+    var List = from i in Model group i by i.Sender into total select new { Sender = total.Key, Messages = total.Count() };
+    foreach (var item in List)
+    {
+        <tr>
+            <td>
+                @item.Sender
+            </td>
+            <td>
+                @item.Messages
+            </td>
+        </tr>
+        }
+    }
+    </tbody>
+</table>
